@@ -20,7 +20,7 @@ const {Client} = require("pg");
 let client = new Client({
   host : "db.oxqhyjwrehowfuwnehuo.supabase.co",
   user : "postgres",
-  password : "",
+  password : "mishra.empapp22",
   database : "postgres",
   port : 5432,
   ssl : {rejectUnauthorized : false},
@@ -43,9 +43,9 @@ app.get("/svr/employees",function(req,res,next) {
   });
 });
 
-app.get("/svr/employee/:empCode",function(req,res,next) {
+app.get("/svr/employee/:empcode",function(req,res,next) {
   console.log("Inside /employee/:empCode Get API");
-  let code = [+req.params.empCode];
+  let code = [+req.params.empcode];
   console.log(code);
   const sql = `SELECT * FROM employees WHERE empcode=$1`;
   client.query(sql,code,function(err,result) {
@@ -125,9 +125,9 @@ app.post("/svr/employee",function(req,res,next) {
   });
 });
 
-app.put("/svr/employee/:empCode",function(req,res,next) {
+app.put("/svr/employee/:empcode",function(req,res,next) {
   console.log("Inside Put of /employees");
-  let code = +req.params.empCode;
+  let code = +req.params.empcode;
   let values = Object.values(req.body);
   console.log(values);
   let arr = [values[1],values[2],values[3],values[4],values[5],code];
@@ -151,9 +151,9 @@ app.put("/svr/employee/:empCode",function(req,res,next) {
   });
 });
 
-app.delete("/svr/employees/:empCode",function(req,res,next) {
+app.delete("/svr/employees/:empcode",function(req,res,next) {
   console.log("Inside /employees/:empCode Delete API");
-  let code = [+req.params.empCode];
+  let code = [+req.params.empcode];
   const sql = `DELETE FROM employees WHERE empcode=$1`;
   client.query(sql,code,function(err,result) {
     if(err) {
